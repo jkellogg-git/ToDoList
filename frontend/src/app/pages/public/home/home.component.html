@@ -1,0 +1,85 @@
+<div class="home-container">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Organize Your Tasks with TaskMaster</h1>
+      <p class="subtitle">A simple, efficient way to manage your daily tasks and boost productivity</p>
+
+      <div class="cta-buttons">
+        <button class="btn-primary login-btn" (click)="login()">
+          <img src="assets/google-icon.svg" alt="Google" class="google-icon">
+          Sign in with Google
+        </button>
+        <a routerLink="/contact" class="btn-secondary">Contact Us</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <!-- Replace with an actual image URL or create a simple image -->
+      <img src="assets/task-illustration.svg" alt="Task Management Illustration">
+    </div>
+  </section>
+
+  <section class="features-section">
+    <h2>Why Choose TaskMaster?</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+          </svg>
+        </div>
+        <h3>Simple Task Management</h3>
+        <p>Create, organize, and track your tasks in one place. No complicated setup required.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+          </svg>
+        </div>
+        <h3>Priority Management</h3>
+        <p>Set priorities for your tasks to focus on what matters most and achieve your goals faster.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+        </div>
+        <h3>Smart Search & Filtering</h3>
+        <p>Easily find tasks with powerful search and filtering options to keep you organized.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Sign In</h3>
+        <p>Quickly sign in with your Google account - no new passwords to remember.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Create Tasks</h3>
+        <p>Add tasks with titles, descriptions, and priority levels.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Stay Organized</h3>
+        <p>Track progress, mark tasks as complete, and enjoy a more productive day.</p>
+      </div>
+    </div>
+
+    <div class="cta-center">
+      <button class="btn-primary" (click)="login()">Get Started Now</button>
+    </div>
+  </section>
+</div>

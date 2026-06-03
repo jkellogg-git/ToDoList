@@ -1,0 +1,117 @@
+<div class="contact-container">
+  <div class="contact-header">
+    <h1>Contact Us</h1>
+    <p>Have questions or feedback? We'd love to hear from you.</p>
+  </div>
+
+  <div class="contact-form-container">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{'is-invalid': submitted && contactForm.get('name')?.errors}"
+        >
+        @if (submitted && contactForm.get('name')?.errors) {
+          <div class="invalid-feedback">
+            @if (contactForm.get('name')?.errors?.['required']) {
+              <div>Name is required</div>
+            }
+            @if (contactForm.get('name')?.errors?.['minlength']) {
+              <div>Name must be at least 2 characters</div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{'is-invalid': submitted && contactForm.get('email')?.errors}"
+        >
+        @if (submitted && contactForm.get('email')?.errors) {
+          <div class="invalid-feedback">
+            @if (contactForm.get('email')?.errors?.['required']) {
+              <div>Email is required</div>
+            }
+            @if (contactForm.get('email')?.errors?.['email']) {
+              <div>Please enter a valid email address</div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input
+          type="text"
+          id="subject"
+          formControlName="subject"
+          class="form-control"
+          [ngClass]="{'is-invalid': submitted && contactForm.get('subject')?.errors}"
+        >
+        @if (submitted && contactForm.get('subject')?.errors) {
+          <div class="invalid-feedback">
+            @if (contactForm.get('subject')?.errors?.['required']) {
+              <div>Subject is required</div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          formControlName="message"
+          class="form-control"
+          rows="5"
+          [ngClass]="{'is-invalid': submitted && contactForm.get('message')?.errors}"
+        ></textarea>
+        @if (submitted && contactForm.get('message')?.errors) {
+          <div class="invalid-feedback">
+            @if (contactForm.get('message')?.errors?.['required']) {
+              <div>Message is required</div>
+            }
+            @if (contactForm.get('message')?.errors?.['minlength']) {
+              <div>Message must be at least 10 characters</div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          @if (!submitted) {
+            Send Message
+          } @else {
+            Sending...
+          }
+        </button>
+      </div>
+    </form>
+
+    <div class="contact-info">
+      <h3>Other Ways to Reach Us</h3>
+      <p>
+        <strong>Email:</strong> <a href="mailto:support@taskmaster.com">support&#64;taskmaster.com</a>
+      </p>
+      <p>
+        <strong>Phone:</strong> (555) 123-4567
+      </p>
+      <p>
+        <strong>Address:</strong><br>
+        TaskMaster, Inc.<br>
+        123 Todo Lane<br>
+        Organization City, ST 12345
+      </p>
+    </div>
+  </div>
+</div>

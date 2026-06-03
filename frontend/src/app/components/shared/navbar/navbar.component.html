@@ -1,0 +1,38 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a routerLink="/">TaskMaster</a>
+    </div>
+
+    <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="navbar-menu" [class.is-open]="isMenuOpen">
+      <div class="navbar-start">
+        @if(authService.isAuthenticated$ | async) {
+          <ng-container>
+            <a routerLink="/app/dashboard" routerLinkActive="active" class="navbar-item">Dashboard</a>
+            <a routerLink="/app/search" routerLinkActive="active" class="navbar-item">Search</a>
+          </ng-container>
+        } @else {
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-item">Home</a>
+          <a routerLink="/contact" routerLinkActive="active" class="navbar-item">Contact</a>
+        }
+      </div>
+
+      <div class="navbar-end">
+
+        @if (authService.isAuthenticated$ | async) {
+          <div class="user-menu">
+            <button class="btn-logout" (click)="logout()">Logout</button>
+          </div>
+        } @else {
+          <button class="btn-login" (click)="login()">Sign in</button>
+        }
+      </div>
+    </div>
+  </div>
+</nav>

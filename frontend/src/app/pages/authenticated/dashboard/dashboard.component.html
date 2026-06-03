@@ -1,0 +1,198 @@
+<div class="dashboard-container">
+  <h1>Task Dashboard</h1>
+
+  <section class="create-task-section">
+    <h2>Create New Task</h2>
+
+    <form [formGroup]="taskForm" (ngSubmit)="onCreateTask()" class="task-form">
+
+      @if (error.taskForm) {
+        <div class="error-message">
+          {{ error.taskForm }}
+        </div>
+      }
+
+      <div class="form-group">
+        <label for="title">Task Title</label>
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          placeholder="Enter task title"
+          [class.is-invalid]="taskForm.get('title')?.invalid && taskForm.get('title')?.touched"
+        >
+
+        @if (taskForm.get('title')?.invalid && taskForm.get('title')?.touched) {
+          <div class="validation-error">
+            @if (taskForm.get('title')?.errors?.['required']) {
+              <span>Title is required.</span>
+            }
+            @if (taskForm.get('title')?.errors?.['maxlength']) {
+              <span>Title cannot be more than 100 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Enter task description"
+          rows="3"
+          [class.is-invalid]="taskForm.get('description')?.invalid && taskForm.get('description')?.touched"
+        ></textarea>
+
+        @if (taskForm.get('description')?.invalid && taskForm.get('description')?.touched) {
+          <div class="validation-error">
+            @if (taskForm.get('description')?.errors?.['maxlength']) {
+              <span>Description cannot be more than 500 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" formControlName="taskPriority">
+          @for (priority of priorities; track priority) {
+            <option value="{{ priority }}">
+              {{ priority | titlecase }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary create-btn"
+        [disabled]="taskForm.invalid || loading.taskForm"
+      >
+        @if (!loading.taskForm) {
+          <span>Create Task</span>
+        } @else {
+          <span>Creating...</span>
+        }
+      </button>
+    </form>
+  </section>
+
+
+  <section class="active-tasks-section">
+    <div class="section-header">
+      <h2>Active Tasks</h2>
+      @if (activeTasks.length > 0) {
+        <a routerLink="/app/search" [queryParams]="{status: 'in_progress'}" class="view-all">
+          View All
+        </a>
+      }
+    </div>
+
+    @if (loading.activeTasks) {
+      <div class="loading-indicator">
+        Loading tasks...
+      </div>
+    }
+
+    @if (error.activeTasks) {
+      <div class="error-message">
+        {{ error.activeTasks }}
+      </div>
+    }
+
+    @if (!loading.activeTasks && !error.activeTasks) {
+      @if (activeTasks.length === 0) {
+        <div class="empty-state">
+          No active tasks. Create one using the form above!
+        </div>
+      }
+
+      @if (activeTasks.length > 0) {
+        <ul class="task-list">
+          @for (task of activeTasks; track task.id) {
+            <li class="task-item">
+              <div class="task-header">
+                <h3>{{ task.title }}</h3>
+                <span [class]="'priority-badge ' + getPriorityClass(task.taskPriority)">
+                  {{ task.taskPriority }}
+                </span>
+              </div>
+
+              @if (task.description) {
+                <p class="task-description">{{ task.description }}</p>
+              }
+
+              <div class="task-footer">
+                <span class="created-date">Created: {{ task.created_date | date }}</span>
+
+                <div class="task-actions">
+                  <button (click)="completeTask(task.id)" class="btn-success">Complete</button>
+                  <button (click)="deleteTask(task.id)" class="btn-danger">Delete</button>
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </section>
+
+  <section class="completed-tasks-section">
+    <div class="section-header">
+      <h2>Recently Completed</h2>
+      @if (completedTasks.length > 0) {
+        <a routerLink="/app/search" [queryParams]="{status: 'completed'}" class="view-all">
+          View All
+        </a>
+      }
+    </div>
+
+    @if (loading.completedTasks) {
+      <div class="loading-indicator">
+        Loading tasks...
+      </div>
+    }
+
+    @if (error.completedTasks) {
+      <div class="error-message">
+        {{ error.completedTasks }}
+      </div>
+    }
+
+    @if (!loading.completedTasks && !error.completedTasks) {
+      @if (completedTasks.length === 0) {
+        <div class="empty-state">
+          No completed tasks yet.
+        </div>
+      }
+
+      @if (completedTasks.length > 0) {
+        <ul class="task-list completed">
+          @for (task of completedTasks.slice(0, 5); track task.id) {
+            <li class="task-item">
+              <div class="task-header">
+                <h3>{{ task.title }}</h3>
+                <span [class]="'priority-badge ' + getPriorityClass(task.taskPriority)">
+                  {{ task.taskPriority }}
+                </span>
+              </div>
+
+              @if (task.description) {
+                <p class="task-description">{{ task.description }}</p>
+              }
+
+              <div class="task-footer">
+                <span class="created-date">Completed: {{ task.created_date | date }}</span>
+
+                <div class="task-actions">
+                  <button (click)="deleteTask(task.id, true)" class="btn-danger">Delete</button>
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </section>
+</div>
