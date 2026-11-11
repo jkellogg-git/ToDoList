@@ -1,6 +1,6 @@
 # ToDoList
 
-A full-stack task management application built as the WGU D424 Software Engineering Capstone project. Users authenticate with their Google account and can create, manage, and track personal to-do items with priority levels and status tracking.
+A full-stack task management application. Users authenticate with their Google account and can create, manage, and track personal to-do items with priority levels and status tracking.
 
 ## Tech Stack
 
